@@ -1,0 +1,38 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% load crispy_forms_tags %}
+{% block title%}WorkSpot{%endblock%}
+{% block body%}
+
+<style>
+  strong{
+    visibility: hidden;
+  }
+  #div_id_Your_Name{margin-top: 30px;}
+  #div_id_Price{margin-top: 50px;}
+  
+</style>
+
+
+<section class="text-gray-600 body-font relative"  style="padding-top: 5rem;">
+  <div class="container px-5 mx-auto">
+    <div class="flex flex-col text-center w-full">
+      <!-- <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray"><span style="background-color: goldenrod; padding: 10px;border-radius: 20px;">Design Publisher Form</span></h1> -->
+      <h1 class="text-gray-900 title-font font-medium mb-1 mt-4"><span style="background-color: goldenrod; padding: 10px;border-radius: 20px;"> Design Publisher Form</span></h1>
+    </div>
+    <div class="lg:w-1/2 mx-auto">
+      <div class="flex flex-wrap m-2 justify-content-center">
+        <div class="w-full">
+          <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <fieldset style="color: black;font-weight: bolder;">
+              {{ w_form |crispy }}
+            </fieldset>
+            <button type="submit" class="genric-btn info radius w-full mb-10">Publish Now!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%endblock%}

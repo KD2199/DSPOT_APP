@@ -1,0 +1,261 @@
+{%extends 'basic.html'%} {% load static%} {% block title%}DSPOT{%endblock%}
+{% block body%}
+<style>
+  .circular--portrait {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .circular--portrait img {
+    width: 100%;
+    height: auto;
+  }
+
+  .carousel-inner{
+      min-height: 150px;
+    }
+
+    .item, img{
+        /* height: 100% !important; */
+        width:  50% !important;
+        border-radius: 20px;
+    }
+
+    .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+</style>
+
+{% if not user.is_authenticated%}
+<body onLoad="$('#Home').modal('show');">
+
+<div style="width: auto ;">
+  <div class="modal fade" id="Home" tabindex="-1" role="dialog" aria-labelledby="Home" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="margin-top: 16%;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <center>
+            <h5 style="color:#252525;font-size: x-large;font-weight: bolder;">Are You Creative ? Show Your Creativity Here!</h5>
+            <h5 style="color:#252525;font-size: x-large;font-weight: bolder;"><a data-toggle="modal" data-target="#signupModal" onclick="$('#Home').modal('hide');"><img src="{% static 'start.gif' %}" alt=""></a></h5>
+          </center><br>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+{% endif %}
+
+
+<div style="padding-top: 4rem;" >
+
+ 
+<!--? slider Area Start -->
+<div class="slider-area ">
+  <div class="slider-active">
+      <!-- Single Slider -->
+      <div class="single-slider slider-height d-flex align-items-center slide-bg" style="background-image: url('{% static 'hero_2.jpg' %}');background-repeat: no-repeat;background-attachment: fixed;
+      background-size: cover;">
+          <div class="container">
+              <div class="row justify-content-between align-items-center">
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                      <div class="hero__caption">
+                          <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms" style="color: goldenrod;">Select Your New Perfect Style</h1>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Single Slider -->
+      
+      <div class="single-slider slider-height d-flex align-items-center slide-bg" style="background-image: url('{% static 'hero_2.jpg' %}');background-repeat: no-repeat;background-attachment: fixed;
+      background-size: cover;">
+          <div class="container">
+              <div class="row justify-content-between align-items-center">
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                      <div class="hero__caption">
+                          <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms" style="color: goldenrod;">Show Your Creativity Here!</h1>
+                          <!-- Hero-btn -->
+                          {% if user.last_name == 'Professional' %}
+                          <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
+                              <a href="/home/work" class="genric-btn primary-border circle">Show Now!</a>
+                          </div>
+                          {% endif %}
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Single Slider -->
+      <div class="single-slider slider-height d-flex align-items-center slide-bg" style="background-image: url('{% static 'hero_2.jpg' %}');background-repeat: no-repeat;background-attachment: fixed;
+      background-size: cover;">
+          <div class="container">
+              <div class="row justify-content-between align-items-center">
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                      <div class="hero__caption">
+                          <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms" style="color: goldenrod;">Shop By Your Choice!</h1>
+                          <!-- Hero-btn -->
+                          <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
+                              <a href="/home/Category/" class="genric-btn primary-border circle">Browse By Category</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- slider Area End-->
+
+{% if lk %}
+<div class="row text-center mt-5 w-100">
+  <div class="col-xl-12">
+      <div class="section-tittle mb-70">
+          <h2>Newly Added</h2>
+      </div>
+  </div>
+  </div>
+  <section class="new-product-area section-padding15 mb-10" >
+    <div class="container">
+      <div class="container">
+        <div class="row" style="border-radius: 10px;border-color: gray;">
+          {% for j in lk%}
+          {% for i in obj2%}
+          {% if j.Your_Name == i.Your_Name and j.id == i.id %}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm" style="border-radius: 10px;border-color: gray;">
+              <div class="card-body">
+                <div><h5 class="text-medium font-medium title-font text-gray-900 blink_me" style="color: #e82f0e;float: right;font-weight: bold;"> {{i.Select_Region}}</h5>
+                </div><br><br>
+                <center><a><img src="{{i.Upload_Pictures.url}}" class="rounded-lg  h-64 w-100 overflow-hidden" style="border: solid transparent;"></a></center>
+               
+                <h5 class="text-medium font-medium title-font text-gray-900 mt-3 p-2 text-center w-50" style="background-color: goldenrod;"><i
+                  class="fa fa-rupee-sign"></i> {{i.Price}}</h5>
+                  <h5 class="text-medium font-medium title-font text-primary-900 mt-3 p-2 text-center" style="background-color: #343954;color: aliceblue;">
+                    {{i.About_Design}}
+                  </h5>
+
+                {% if not user.is_authenticated%}
+                  <button type="submit" class="genric-btn danger-border circle w-full mt-4">
+                    <a class="nav-link" data-toggle="modal" data-target="#loginModal" style="cursor: pointer;" title="Login">
+                      <i class="fa fa-cart-plus"></i>
+                    Buy Now!</a>
+                    </button>
+                {% endif %}
+              
+                {% if user.is_authenticated%}
+  
+                <center>
+                  <div class="btn-group mt-3 w-80" role="group">
+  
+                    <form action="/home/detail/" method='post' enctype="multipart/form-data" class="mt-2">
+                      {% csrf_token %}
+                      <input type="hidden" name='FW' value="{{i.Your_Name}}">
+                      <button type="submit" class="genric-btn info" title="About {{i.Your_Name}}"><i
+                          class="fa fa-info-circle"></i>
+                        {{i.Your_Name}}</button>
+                    </form>
+                  
+  
+                    {% if i.Your_Name != user.username %}
+
+                    <form action="/home/cart/" method='post' enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input type="hidden" name='FW' value="{{i.Your_Name}}">
+                      <input type="hidden" name='FI' value="{{i.id}}">
+                      <button type="submit" class="genric-btn danger mt-2 ml-2"><i class="fa fa-cart-plus"></i>
+                        Add To Cart</button>
+                    </form>
+
+                    {% else %}
+
+                    {% if i.Make_Private is True %}
+                    <center>
+                      <form method="post" action="/home/makepb/">
+                        {% csrf_token %}
+                        <input type="hidden" name="SS" value="{{i.id}}">
+                        <input type="submit" class="genric-btn danger mt-2 ml-2" value=" &#xf13e; Make Public"
+                          style="width: 100%;font-family: FontAwesome;">
+                      </form>
+                    </center>
+
+                    {% else %}
+                    <center>
+                      <form method="post" action="/home/makepv/">
+                        {% csrf_token %}
+                        <input type="hidden" name="SS" value="{{i.id}}">
+                        <input type="submit" class="genric-btn danger mt-2 ml-2" value=" &#xf023; Make Private"
+                          style="width: 100%;font-family: FontAwesome;">
+                      </form>
+                    </center>
+                    {% endif %}
+                    {% endif %}
+  
+                  </div>
+
+                </center>
+                
+                <center>
+                  <div class="btn-group mt-3 w-80" role="group">
+  
+                    <form action="/home/Save/" method='post' enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input type="hidden" name='FW' value="{{i.Your_Name}}">
+                      <input type="hidden" name='FI' value="{{i.id}}">
+                      <button type="submit" class="genric-btn primary-border circle"><i class="fa fa-bookmark"></i>
+                        Save</button>
+                    </form>
+  
+                    <form action="/home/LKS/" method='post' enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <input type="hidden" name='FW' value="{{i.Your_Name}}">
+                      <input type="hidden" name='FI' value="{{i.id}}">
+                      <button type="submit" class="genric-btn primary-border circle ml-2"><i class="fa fa-thumbs-up"></i>
+                        Like ({{i.Likes}})</button>
+                    </form>
+  
+                  </div>
+
+                </center>
+  
+                <center>
+                  <form action="/home/feedback/" method='post' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name='FW' value="{{i.Your_Name}}">
+                    <input type="hidden" name='FI' value="{{i.id}}">
+                    <input type="text" placeholder="  &#xf0e6; Write Your Feedback" name="CM" class="form-control"
+                      style="border-radius: 20px;margin-top: 20px;font-family: FontAwesome;overflow: hidden;border-color: gray;"></input>
+                  </form>
+                </center>
+  
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor%}
+          {% endfor%}
+        </div>
+      </div>
+  </section>
+{%endif%}
+</div>
+{%endblock%}

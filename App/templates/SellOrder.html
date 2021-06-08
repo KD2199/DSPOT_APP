@@ -1,0 +1,73 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}Your BookedOrders{%endblock%}
+
+
+{% block body%}
+<style>
+  .banner {
+    position: relative;
+    width: 200px;
+    /* height:auto; */
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+
+</style>
+
+
+{% if Data %}
+
+<section class="text-gray-700 body-font"  style="padding-top: 5rem;">
+  <div class="container">
+    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+      <div class="flex flex-col text-center w-full mb-10">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Your BookedOrders</h1>
+      </div>
+      <table class="table-hover table-auto w-full text-left whitespace-no-wrap-table-responsive-xl">
+        <thead>
+          <tr>
+            <th
+              class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl rounded-bl">
+              Design_ID</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Booked_by</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Booking_Date
+            </th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Booking_ID
+            </th>
+            <th
+              class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr rounded-br">
+              Price </th>
+              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Booking_Status
+              </th>
+          </tr>
+        </thead>
+        {% for i in Data %}
+        <tbody>
+          <tr>
+            <td class="px-4 py-3">{{i.Design_No}}</td>
+            <td class="px-4 py-3">{{i.made_by}}</td>
+            <td class="px-4 py-3">{{i.made_on}}</td>
+            <td class="px-4 py-3">{{i.order_id}}</td>
+            <td class="px-4 py-3">{{i.amount}}</td>
+            <td class="px-4 py-3">{{i.Status}}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</section>
+
+{%else%}
+
+<div class="flex flex-col text-center w-full mb-20 mt-20">
+  <img src="/static/ord.svg" class="banner"><br>
+  <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900" style="color:red">You Have No Booked Order</h1>
+</div>
+
+{%endif%}
+
+{%endblock%}

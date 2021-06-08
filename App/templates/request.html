@@ -1,0 +1,65 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}Connection Requests{%endblock%}
+
+
+{% block body%}
+<style>
+    .banner {
+      position: relative;
+      width: 300px;
+      /* height:auto; */
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+  </style>
+<center>
+    {% for i in obj %}
+    {% if obj != None%}
+    <div class="lg:w-2/3 w-full mx-auto overflow-auto"  style="padding-top: 5rem;">
+        <table class="table-auto w-full text-left whitespace-no-wrap">
+            <thead>
+                <tr>
+
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200"
+                        style="background-color: black;color: whitesmoke;font-weight: bolder;">SenderName
+                    </th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200"
+                        style="background-color: black;color: whitesmoke;font-weight: bolder;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in obj %}
+
+                <tr style="font-weight: bolder;background-color: whitesmoke;">
+                    <td class="px-4 py-3">{{i.Sender}}
+                    </td>
+                    {% if i.Status is False %}
+                    <form method="post" action="/home/Accept/">
+                        {% csrf_token %}
+                        <input type="hidden" name="SS" value="{{i.pk}}">
+                        <td class="px-4 py-3"><input type="submit" class="genric-btn info radius mt-2" value="Accept">
+                        </td>
+                    </form>
+                    {% else %}
+                    <td class="px-4 py-3"><input type="button" class="genric-btn danger radius mt-2" value="Accepted">
+                    </td>
+                    {% endif %}
+                </tr>
+                </form>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    {% empty %}
+        <div class="flex flex-col text-center w-full mb-20 mt-20">
+            <img src="/static/rqst.svg" class="banner"><br>
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900" style="color:red">You Have No Any Connection Request</h1>
+        </div>
+    {% endfor %}
+</center>
+{%endblock%}

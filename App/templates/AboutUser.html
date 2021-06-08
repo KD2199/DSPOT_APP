@@ -1,0 +1,194 @@
+{%extends 'basic.html'%}
+{% load static%}
+
+{% block title%}
+{% for i in obj %}About {{i.username}}{% endfor %}
+{%endblock%}
+
+{% block body%}
+<style>
+    /* The popup chat - hidden by default */
+    .chat-popup {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+        max-width: 300px;
+        padding: 10px;
+        background-color: white;
+    }
+
+    /* Full-width textarea */
+    .form-container input {
+        width: 100%;
+        cursor: pointer;
+        border-radius: 20px;
+        padding: 15px;
+        background-color: #252525;
+        color: aliceblue;
+        margin-top: 20px;
+    }
+
+    /* Set a style for the submit/send button */
+    .form-container .btn {
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8;
+        margin-top: 10px;
+    }
+
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover,
+    .open-button:hover {
+        opacity: 1;
+    }
+    
+</style>
+
+<center>
+    {% for i in obj %}
+    <section class="text-gray-700 body-font" style="margin-top: 5%;">
+        <div class="container px-5 py-0 mx-auto">
+            <div class="flex flex-col text-center w-full mb-20">
+                {% if i.last_name == 'Professional' %}
+                <h1 class="text-gray-900 title-font font-medium mb-1 mt-4"><span style="background-color: goldenrod; padding: 10px;border-radius: 20px;"><i class="fa fa-user-shield"></i> Professional
+                    Account</span></h1>
+                {%else%}
+                <h1 class="text-gray-900 title-font font-medium mb-1 mt-4"><span style="background-color: goldenrod; padding: 10px;border-radius: 20px;"><i class="fa fa-user-lock"></i> General
+                        Account</span></h1>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    <section>
+        <div class="container">
+            <div>
+                <div class="lg:w-1/2 w-full">
+                    <div class="flex mb-4">
+                        {% for i in obj %}
+                        {% if i.last_name == 'Professional' %}
+                        <a class="flex-grow text-indigo-500 py-2 text-lg px-1" title=" Posts"><button
+                                class="genric-btn primary-border circle "><i class="fa fa-folder-plus"></i>:
+                                {{post}}</button></a>
+                        {% endif %}
+                        {% endfor %}
+                        <a class="flex-grow text-indigo-500 py-2 text-lg px-1" title="Followers"><button
+                                class="genric-btn primary-border circle ml-2"><i class="fa fa-user-plus"></i>
+                                : {{obj3}}</button></a>
+                        <a class="flex-grow text-indigo-500 py-2 text-lg px-1" title="Following"><button
+                                class="genric-btn primary-border circle ml-2"><i class="fa fa-user-check"></i>
+                                : {{obj2}}</button></a>
+                    </div>
+                    {% for i in obj %}
+                    <center>
+                        <input type="text" class="form-control w-50" value="{{i.username}}" readonly>
+                        <input type="email" class="form-control w-50 mt-4" value="{{i.email}}" readonly>
+                    </center>
+                        <!-- <div class="flex py-2">
+                            <input type="text" class="form-control w-50" value="{{i.username}}" readonly>
+                        </div>
+                        <div class="flex py-2">
+                            <input type="email" class="form-control w-50" value="{{i.email}}" readonly>
+                        </div> -->
+            
+                    <!-- <div class="flex py-2">
+                        <input type="tel" class="form-control" value="{{i.first_name}}" readonly>
+                    </div> -->
+
+                    {% if i.username != user.username%}
+                    <form action="/home/send/" method='post' enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for j in obj1 %}
+
+                        <center>
+                            {% if j.UserName == i.username and j.Sender == user.username and j.Status == True %}
+                            <input type="button" value="Following" class="genric-btn danger radius mt-2 w-full">
+                            {% elif j.UserName == i.username and j.Sender == user.username and j.Status == False  %}
+                            <input type="button" value="Requested" class="genric-btn danger radius mt-2 w-full">
+                            {% endif %}
+                        </center>
+
+                        {% empty %}
+
+                        <center>
+                            <input type="hidden" name='FW' value="{{i.username}}">
+                            <input title="Send Follow Request" type="submit" value="+ Follow"
+                                class="genric-btn info radius mt-2  w-full">
+                        </center>
+
+                        {% endfor %}
+                    </form>
+
+
+                    <center><button type="button" class="genric-btn primary radius mt-2 mb-4 w-full" data-toggle="modal"
+                            data-target="#MessageModal"><i class="fas fa-paper-plane"></i> Talk With
+                            {{i.username}}</button></center>
+
+                    <!-- Message Modal -->
+                    <div class="modal fade" id="MessageModal" tabindex="-1" role="dialog" aria-labelledby="MessageModal"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="margin-top: 16%;">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="/home/chat/" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div>
+                                            <h2>Chat With {{i.username}}</h2>
+                                            <input type="hidden" name='chatuser' value="{{i.username}}">
+                                            {% for t in msg1 %}
+                                            <label style="float: right;margin-top: 10px;">{{t.Message}}
+                                                {{t.DateTime}}</label><br><br>
+                                            {% endfor %}
+
+                                            {% for t in msg2 %}
+                                            <label style="float: left;margin-top: 10px;">{{t.Message}}
+                                                {{t.DateTime}}</label><br><br>
+                                            {% endfor %}
+
+                                        </div><br>
+                                        <div>
+                                            <input style="width:100%;cursor: pointer;border-radius: 20px;" id="message"
+                                                type="text" name="msg" placeholder="Type Message Here..... "
+                                                class="form-control" required>
+                                        </div><br>
+                                        <button type="submit" class="genric-btn info radius mt-2  w-full">Send</button>
+                                    </form>
+                                    <form method="post" action="/home/cleartalk/" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="hidden" name='chatuser' value="{{i.username}}">
+                                        <button type="submit" class="genric-btn danger radius mt-2  w-full">Clear
+                                            Conversation
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+    </section>
+</center>
+
+
+{%endblock%}

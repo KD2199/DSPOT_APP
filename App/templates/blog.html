@@ -1,0 +1,177 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}Blog{%endblock%}
+
+{% block body%}
+
+<style>
+  .circular--portrait {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .circular--portrait img {
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+<!-- <section class="blog-banner-area" id="blog">
+  <div class="row justify-content-center">
+    <div class="col-xl-7 col-lg-8 col-md-10">
+      <div class="section-tittle mb-70 text-center">
+        <h2>Popular Blogers</h2>
+      </div>
+    </div>
+  </div>
+  </section>
+<div style="margin-top: 5%;">
+    <center>
+
+        {% for i in obj %}
+        {% if i.username != user.username %}
+        <div style="margin-top: 20px;">
+            <img src="{{i.profile.Profile_Image.url}}" class="circular--portrait "  alt="...">
+            <form action="/home/detail/" method='post' enctype="multipart/form-data">
+                {% csrf_token %}
+                <center>
+                    <input type="hidden" name='FW' value="{{i.username}}">
+                    <input title="Get Details" type="submit" value="About {{i.username}}" class="genric-btn info radius mt-2"
+                        style="font-weight: bolder;cursor: pointer;margin-top: 20px;" id="btns">
+                </center>
+            </form>
+            <div style="margin-top: 10px;">
+                <a href="mailto:{{i.email}}}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook px-2" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter px-2" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram px-2" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor%}
+</div>
+</center>
+
+</div><br> -->
+
+
+<!-- <section class="new-product-area section-padding15"  style="padding-top: 5rem;">
+  <div class="container">
+    <div class="popular-items section-padding20">
+      <div class="container">
+        <div class="row text-center mt-5 w-100">
+          <div class="col-xl-12">
+              <div class="section-tittle mb-70">
+                  <h2>Our Community</h2>
+              </div>
+          </div>
+          </div>
+    
+        <div class="row justify-content-center" style="background-color: goldenrod; padding: 10px;border-radius: 20px;">
+          <div class="col-xl-7 col-lg-8 col-md-10 pt-5">
+            <div class="section-tittle mb-70 text-center">
+              <h2><span>Our Community</span></h2>
+            </div>
+          </div>
+        </div>
+        <center>
+          {% for i in obj %}
+          {% if i.username != user.username %}
+          <div style="margin-top: 20px;">
+            <img src="{{i.profile.Profile_Image.url}}" class="circular--portrait " alt="...">
+            <form action="/home/detail/" method='post' enctype="multipart/form-data">
+              {% csrf_token %}
+              <center>
+                <input type="hidden" name='FW' value="{{i.username}}">
+                <input title="Get Details" type="submit" value="About {{i.username}}"
+                  class="genric-btn info radius mt-4" style="font-weight: bolder;cursor: pointer;margin-top: 20px;"
+                  id="btns">
+              </center>
+            </form>
+            <div style="margin-top: 10px;">
+              <a href="mailto:{{i.email}}}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+              <a href="#"><i class="fa fa-facebook px-2" aria-hidden="true"></i></a>
+              <a href="#"><i class="fa fa-twitter px-2" aria-hidden="true"></i></a>
+              <a href="#"><i class="fa fa-instagram px-2" aria-hidden="true"></i></a>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor%}
+        </center>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<!-- <center>
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-24">
+      <div class="col-xl-12">
+        <div class="section-tittle mb-70">
+            <h2>Our Community</h2>
+        </div>
+    </div>
+      <div class="flex flex-wrap -m-4">
+        {% for i in obj %}
+            {% if i.username != user.username %}
+        <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
+          <div class="h-full text-center">
+            <img class="circular--portrait" src="{{i.profile.Profile_Image.url}}">
+            <form action="/home/detail/" method='post' enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="hidden" name='FW' value="{{i.username}}">
+              <input type="submit" value="{{i.username}}"class="genric-btn info radius mt-2">
+              <div style="margin-top: 10px;">
+                <a href="mailto:{{i.email}}}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook px-2" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter px-2" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram px-2" aria-hidden="true"></i></a>
+              </div>
+          </form>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor%}
+      </div>
+    </div>
+  </section>
+</center> -->
+
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="col-xl-12 text-center">
+      <div class="section-tittle mb-70">
+          <h2>Our Community</h2>
+      </div>
+  </div>
+    <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+      {% for i in obj %}
+      {% if i.username != user.username %}
+      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <center><img alt="content" class="circular--portrait object-center" src="{{i.profile.Profile_Image.url}}"></center>
+        <h2 class="text-xl font-medium title-font text-gray-900 mt-5">{{i.username}}</h2>
+        {% if i.last_name == 'Professional' %}
+        <p class="text-base mt-2">DSPOT Designer</p>
+        {% endif %}
+        <form action="/home/detail/" method='post' enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" name='FW' value="{{i.username}}">
+          <input type="submit" value="About {{i.username}} &#xf061" class="text-indigo inline-flex items-center md:mb-2 lg:mb-0 mt-2 bg-light" style="font-family: FontAwesome;overflow: hidden;cursor: pointer;">
+          <div style="margin-top: 10px;">
+            <a href="mailto:{{i.email}}}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-facebook px-2" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter px-2" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-instagram px-2" aria-hidden="true"></i></a>
+          </div>
+        </form>
+      </div>
+      {% endif %}
+      {% endfor%}
+    </div>
+  </div>
+</section>
+{%endblock%}

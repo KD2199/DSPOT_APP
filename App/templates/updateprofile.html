@@ -1,0 +1,57 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% load crispy_forms_tags %}
+{% block title%}{{user.username}}'s Profile{%endblock%}
+
+
+{% block body%}
+
+<style>
+    a {
+       color: navy;
+    }
+    a:hover {
+       color: black;
+    }
+    #id_Profile_Image
+    {
+        color: navy;
+    }
+    center{
+        margin-top: 3%;
+    }
+    label{
+        color: red; 
+        visibility: hidden; 
+    }
+    div{
+        color: red;
+        margin-top: 10px;
+    }
+    input{
+        padding-top: 20px;
+        max-width: 50%;
+    }
+    h1{
+        margin-top: 10px;
+    }
+
+
+</style>
+
+
+<center  style="padding-top: 5rem;">
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <fieldset class="form-group"
+            style="width:80%;font-weight: bolder;justify-content: center;border:  black double ;border-radius: 20px;">
+            <!-- {{ u_form|crispy }} -->
+            <h1 class="text-gray-900 title-font font-medium mb-1 mt-4"><span style="background-color: goldenrod; padding: 10px;border-radius: 20px;"><i class="fa fa-user-cog"></i> Profile Setting</span></h1>
+            {{ p_form |crispy }}
+
+        </fieldset>
+        <button type="submit" class="genric-btn info radius">Save Changes</button>
+        
+    </form>
+</center>
+
+{%endblock%}

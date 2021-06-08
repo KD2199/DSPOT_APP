@@ -1,0 +1,50 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}{{user.username}}'s Orders History{%endblock%}
+
+
+{% block body%}
+
+<section class="text-gray-700 body-font"  style="padding-top: 5rem;">
+    <div class="container">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Order History
+            </h1>
+
+        </div>
+        {%for i in Data%}
+        <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+            <table class="table-auto w-full text-left whitespace-no-wrap">
+                <tbody>
+
+                    <tr>
+                        <td class="px-4 py-3"> ORDERID</td>
+                        <td class="px-4 py-3"> {{ i.order_id }} </td>
+
+                    </tr>
+                
+                    <tr>
+                        <td class="px-4 py-3"> TXNAMOUNT</td>
+                        <td class="px-4 py-3"> {{ i.amount }} </td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3"> TXNDATE</td>
+                        <td class="px-4 py-3"> {{ i.made_on }} </td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3"> ORDERSTATUS</td>
+                        {% if i.Status == 'TXN_SUCCESS' %}
+                        <td class="px-4 py-3"> Completed </td>
+                        {% else %}
+                        <td class="px-4 py-3"> Pending/Cancelled </td>
+                        {% endif %}
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+        <center><a href="/"><button class="genric-btn danger radius mt-5 w-1/2"> Go Back To Home</button></a></center>
+    </div>
+</section>
+{%endblock%}

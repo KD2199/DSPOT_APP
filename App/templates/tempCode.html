@@ -1,0 +1,180 @@
+ <!-- {% if user.last_name == 'Professional' %}
+<p style="width: 100%;color: white;text-align: center;background-color:dodgerblue;padding: 10px;">Are You Creative ? Show Your Creativity <a href="/home/work" style="color:orangered;">Here</a></p>
+{% endif %} -->
+  <!--? slider Area Start -->
+  <!-- <div class="slider-area ">
+    <div class="slider-active">
+
+        <div class="single-slider slider-height d-flex align-items-center slide-bg" style="background-image: url('{% static 'hero_2.jpg' %}');">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                        <div class="hero__caption">
+                            <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms" style="color: goldenrod;">Select Your New Perfect Style</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="single-slider slider-height d-flex align-items-center slide-bg" style="background-image: url('{% static 'back.jpg' %}');">
+          <div class="container">
+              <div class="row justify-content-between align-items-center">
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                      <div class="hero__caption">
+                          <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms" style="color: goldenrod;">Select Your New Perfect Style</h1>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+</div> -->
+<!-- slider Area End-->
+
+ <!-- <center>
+      <div style="margin-top: 2%">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{% static 'myP.jpg' %}">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'back.jpg' %}">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static '6.jfif' %}">
+            </div>
+          </div>
+        </div>
+       </div>
+    </center> -->
+
+    <!-- <center>
+  <div class="mt-10 mb-20">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'myP.jpg' %}">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'hero_2.jpg' %}">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static '5.jfif' %}">
+        </div>
+      </div>
+    </div>
+   </div>
+</center> -->
+
+<!-- <section class="blog-banner-area mt-2" id="blog">
+  <div class="container">
+    <div class="blog-banner">
+      <div class="text-center">
+        <center>
+          <h1 class="display-4 mb-4" style="color: black;">
+            Welcome Upload Your Work Here
+          </h1>          
+          <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <fieldset style="width:50%;color: black;font-weight: bolder;justify-content: center;align-content: center;">
+              {{ w_form |crispy }}
+            </fieldset>
+            <button type="submit" class="genric-btn info radius mb-10">Publish Now!</button>
+          </form>
+        </center>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <section class="text-gray-700 body-font">
+    <div class="container py-15 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Your SellOrder</h1>
+      </div>
+      <table class="table-auto w-full text-left whitespace-no-wrap table-hover" style="width: 100%;margin-left: auto;margin-right: auto;">
+        <thead>
+          <tr class="table-active px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl rounded-bl">
+            <th scope="col">Design No</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Orderid</th>
+          </tr>
+        </thead>
+        {% for i in Data %}
+        <tbody>
+          <tr class="bg-warning">
+            <td>{{i.Design_No}}</td>
+            <td>{{i.made_by}}</td>
+            <td>{{i.made_on}}</td> 
+            <td>{{i.order_id}}</td> 
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </section> -->
+  <!-- <section class="text-gray-700 body-font">
+  <div class="container px-5 py-20 mx-auto">
+    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900" style="color: red;">You Not Have Any Booked Order</h1>
+      </div>
+
+    </div>
+  </div>
+</section> -->
+
+  <!-- <div class="container mt-2">
+        <div class="lg:w-2/3 mx-auto">
+          <div class="flex flex-wrap m-2 justify-content-center">
+            <div class="w-full">
+              <fieldset style="color: black; font-weight: bolder">
+                <a href="/Account/Inbox/" title="Your MailBox"
+                  ><button
+                    type="button"
+                    class="genric-btn primary-border radius w-1/2"
+                  >
+                    <i class="fa fa-envelope-open"></i> My MailBox
+                  </button></a
+                >
+  
+                <a href="/home/requests/" title="Pending Requests"
+                  ><button
+                    type="button"
+                    class="genric-btn primary-border radius w-1/2 mt-2"
+                  >
+                <i class="fa fa-user-tag"></i> My Requests
+                  </button></a
+                >
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-2/3 mx-auto">
+          <div class="flex flex-wrap m-2 justify-content-center">
+            <div class="w-full">
+              <fieldset style="color: black; font-weight: bolder">
+                <a href="/home/usave/" title="Your Saved Design"
+                  ><button
+                    type="button"
+                    class="genric-btn primary-border radius w-1/2"
+                  >
+                    <i class="fa fa-bookmark"></i> My BookMark
+                  </button></a
+                >
+  
+                <a href="/Account/delete/" title="Remove Account"
+                  ><button
+                    type="button"
+                    class="genric-btn primary-border radius w-1/2 mt-2"
+                  >
+                    <i class="fa fa-trash"></i> Account
+                  </button></a
+                >
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div> -->

@@ -1,0 +1,106 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}{{user.username}}'s Orders{%endblock%}
+
+
+{% block body%}
+<style>
+    .banner {
+      position: relative;
+      width: 180px;
+      /* height: 150px; */
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+  </style>
+
+<section class="text-gray-700 body-font"  style="padding-top: 5rem;">
+    <!-- <div class="container px-5">
+
+        <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+            {%for i in Data%}
+            {%for j in Item%}
+            {% if j.id == i.Design_No %}
+            <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+                <div class="rounded-lg h-64 overflow-hidden">
+                    <img alt="content" class="object-cover object-center h-1/2 w-full" src="{{j.Content.url}}">
+                </div>
+                <form action="/home/order_history/" method='post' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <center>
+                        <input type="hidden" name='OID' value="{{i.pk}}">
+                        <button class="genric-btn info radius mt-3 w-full"><i
+                                class="fa fa-history"></i> See Order History </button>
+                    </center>
+                </form>
+            </div>
+            
+            {% endif %}
+            {% endfor %}
+            
+            {% empty %}
+            <div class="flex flex-col text-center w-full mb-20" style="margin-top: 10%;">
+                <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900" style="color:red">You Have No
+                    Any Order</h1>
+            </div>
+            {% endfor %}
+        </div>
+    </div> -->
+
+    <div class="container">
+
+        <div class="row">
+            {%for i in Data%}
+            {%for j in Item%}
+            {% if j.id == i.Design_No %}
+            <div class="col-md-4 mb-10">
+                <div class="card mb-4 shadow-sm" style="border-radius: 20px;">
+                    <div class="card-body">
+                        <center><img src="{{j.Upload_Pictures.url}}" class="rounded-lg h-64 overflow-hidden"></center>
+                        <form action="/home/order_history/" method='post' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <center>
+                                <input type="hidden" name='OID' value="{{i.pk}}">
+                                <button type="submit" class="genric-btn primary-border circle mt-3"><i
+                                        class="fa fa-history"></i>
+                                    See
+                                    Order History</button>
+                            </center>
+                        </form>
+
+                        {% if i.Status == 'TXN_SUCCESS' %}
+                        <center>
+                            <input type="hidden" name='OID' value="{{j.Content.url}}">
+                            <a href="{{j.Content.url}}" class="genric-btn primary-border circle mt-3" download> <i
+                                    class="fa fa-file-download"></i> Dowload Design </a>
+                        </center>
+                        {% else %}
+                        <center>
+                            <input type="hidden" name='OID' value="{{j.Content.url}}">
+                            <a class="genric-btn primary-border circle mt-3" download> <i
+                                    class="fa fa-times-circle"></i> Pending/Cancelled</a>
+                        </center>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor%}
+            {% empty %}
+            <div class="flex flex-col text-center w-full mb-20 mt-20">
+                
+                <img src="/static/NOR.svg" class="banner"><br>
+                <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900" style="color:red">You Have No
+                    Any Orders</h1>
+    
+            </div>
+           
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{%endblock%}

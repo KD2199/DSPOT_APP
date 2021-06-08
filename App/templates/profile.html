@@ -1,0 +1,193 @@
+{%extends 'basic.html'%} {% load static%} {% block title%}{{user.username}}'s
+Profile{%endblock%} {% block body%}
+
+<style>
+  .circular--portrait {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .circular--portrait img {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+
+  .field button {
+    width: 30%;
+  }
+</style>
+
+<div  style="padding-top: 5rem;">
+
+  <center>
+    <a href="/Account/pupdate/">
+      {% csrf_token %}<img
+        class="circular--portrait pt-2"
+        src="{{user.profile.Profile_Image.url}}"
+        title="Change Your Profile Photo"
+    /></a>
+    {% if user.is_superuser%}
+    <h1 class="text-gray-900 title-font font-medium mb-1 mt-4">
+      <span
+        style="background-color: goldenrod; padding: 10px; border-radius: 20px"
+        ><i class="fa fa-user-shield"></i>Administrator</span
+      >
+    </h1>
+  
+    {%else%} {% if user.last_name == 'Professional' %}
+    <h1 class="text-gray-900 title-font font-medium mb-1 mt-4">
+      <span
+        style="background-color: goldenrod; padding: 10px; border-radius: 20px"
+        ><i class="fa fa-user-shield"></i> Professional Account</span
+      >
+    </h1>
+    {%else%}
+    <h1 class="text-gray-900 title-font font-medium mb-1 mt-4">
+      <span
+        style="background-color: goldenrod; padding: 10px; border-radius: 20px"
+        ><i class="fa fa-user-lock"></i> General Account</span
+      >
+    </h1>
+    {% endif %} {% endif %} {% if not user.is_superuser%}
+    <section class="text-gray-600 body-font">
+      <div class="container flex flex-wrap flex-col">
+        <div class="flex mx-auto flex-wrap mt-10">
+          {% if user.last_name == 'Professional' %}
+          <a
+            href="/home/posts/"
+            title="My Designs"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-indigo-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-user-graduate"></i> &nbsp;&nbsp;&nbsp;My Designs
+          </a>
+          {% endif %}
+          <a
+            href="/home/Followers"
+            title="My Followers"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-orange-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-users"></i> &nbsp;&nbsp;&nbsp;My Followers
+          </a>
+          <a
+            href="/home/Following"
+            title="My Following"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-user-friends"></i> &nbsp;&nbsp;&nbsp;My Following
+          </a>
+          {% if user.last_name == 'Professional' %}
+          <a
+            href="/home/sorder/"
+            title="My Clients"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-orange-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-chalkboard-teacher"></i>&nbsp;&nbsp;&nbsp; My Clients
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  
+    <section class="text-gray-600 body-font relative mt-5">
+      <div class="container">
+        <div class="lg:w-2/3 mx-auto">
+          <div class="flex flex-wrap m-2 justify-content-center">
+            <div class="w-full">
+              <fieldset style="color: black; font-weight: bolder">
+                <input
+                  type="text"
+                  class="form-control w-50"
+                  value="{{user.first_name}}"
+                  title="Username"
+                  readonly
+                />
+                <input
+                  type="text"
+                  class="form-control mt-2 w-50"
+                  value="{{user.username}}"
+                  readonly
+                  title="fullName"
+                  readonly
+                />
+                <input
+                  type="email"
+                  class="form-control mt-2 w-50"
+                  value="{{user.email}}"
+                  title="Email"
+                  readonly
+                />
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    {% if not user.is_superuser%}
+    <section class="text-gray-600 body-font">
+      <div class="container flex flex-wrap flex-col mt-3 mb-5">
+        <div class="flex mx-auto flex-wrap">
+  
+          <a
+          href="/Account/Inbox/" title="Your MailBox"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-indigo-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-envelope-open"></i>  &nbsp;&nbsp;&nbsp;My Tickets
+          </a>
+      
+          <a
+          href="/home/requests/" title="Pending Requests"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-orange-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-user-tag"></i>&nbsp;&nbsp;&nbsp; My Requests
+          </a>
+          <a
+          href="/home/usave/" title="Your Saved Design"
+            title="My Following"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-bookmark"></i> &nbsp;&nbsp;&nbsp;My Bookmarks
+          </a>
+          
+          <a
+          href="/Account/delete/" title="Remove Account"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-orange-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;Delete Account
+          </a>
+   
+        </div>
+      </div>
+    </section>
+
+    {% endif %}
+  
+    {% if user.is_superuser%}
+    <section class="text-gray-600 body-font">
+      <div class="container flex flex-wrap flex-col mt-3">
+        <div class="flex mx-auto flex-wrap">
+          <a href="/Account/msg/" title="Your MailBox"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-indigo-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-envelope-open"></i>  &nbsp;&nbsp;&nbsp;Tickets
+          </a>
+          <a
+          href="/admin/" title="Dashboard" target="_blank"
+            class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-orange-500 text-dark tracking-wider rounded-t"
+          >
+            <i class="fa fa-chalkboard-teacher"></i>&nbsp;&nbsp;&nbsp; Dashboard
+          </a>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  
+  </center>
+</div>
+
+{%endblock%}

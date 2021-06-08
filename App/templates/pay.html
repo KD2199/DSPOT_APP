@@ -1,0 +1,36 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}Payment Home{%endblock%}
+
+{% block body%}
+
+<body>
+  {% if error %}
+  <h3>{{ error }}</h3>
+  {% endif %}
+  <div class="row justify-content-center"  style="padding-top: 5rem;">
+    <div class="col-xl-7 col-lg-8 col-md-10">
+      <div class="section-tittle mb-70 text-center">
+        <h2>Pay Now! & Get Exclusive
+          Offers!</h2>
+      </div>
+    </div>
+  </div>
+  <center>
+    <form method="post">
+      {% csrf_token %}
+      <label for="username">Enter Your Username</label>
+      <input type="text" name="username" style="width:auto;border-radius: 20px;padding: 10px;" class="form-control"
+        autofocus required>
+      <label for="password">Enter Your Password</label>
+      <input type="password" name="password" style="width:auto;border-radius: 20px;padding: 10px;" class="form-control"
+        required>
+      <!-- <label for="amount">Amount</label> -->
+      <!-- <input type="number" name="amount" style="width:auto;border-radius: 20px;padding: 10px;" class="form-control"
+        value="{{price}}"> -->
+      <input type="submit" name="submit" value="Submit" class="genric-btn info radius mt-5 w-1/2" required>
+    </form>
+  </center>
+</body>
+
+{%endblock%}

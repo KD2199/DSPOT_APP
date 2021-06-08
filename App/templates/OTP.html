@@ -1,0 +1,51 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}SecretCode Verification{%endblock%}
+
+
+
+{% block body%}
+
+<center>
+     <div class="flex flex-col text-center w-full mb-20"  style="padding-top: 5rem;">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-black-900">SecretCode Verification</h1>
+        </div>
+    <!-- <div style="width: auto;margin-top: 5%;">
+        <strong>
+            <h1
+                style="color:red;background-color: black;font-size: x-large;padding: 20px;width:60%;border-radius: 20px;border: solid whitesmoke;">
+                SecretCode Verification</h1>
+        </strong>
+        <br> -->
+</center>
+
+<center>
+    <div class="modal-body">
+        <form method="post" action="/Account/VC/" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            <div>
+
+                <input autofocus
+                    style="width:auto;padding: 6px;cursor: pointer;color:#252525;background-color: white;border: solid #252525;border-radius: 15px;"
+                    id="uname" type="password" name="c1" placeholder="Enter SecretCode Here "
+                    title="Enter SecretCode Here" required><br>
+
+                <input
+                    style="width:auto;padding: 6px;cursor: pointer;color:#252525;background-color: white;border: solid #252525;border-radius: 15px;visibility: hidden;"
+                    id="uname" type="password" name="c2" value="{{VC}}">
+                <input
+                    style="width:auto;padding: 6px;cursor: pointer;color:#252525;background-color: white;border: solid #252525;border-radius: 15px;visibility: hidden;"
+                    id="uname" type="password" name="username" value="{{username}}">
+                <input
+                    style="width:auto;padding: 6px;cursor: pointer;color:#252525;background-color: white;border: solid #252525;border-radius: 15px;visibility: hidden;"
+                    id="uname" type="password" name="password" value="{{password}}">
+
+
+            </div><br>
+
+            <button type="submit" class="genric-btn danger radius">Submit</button></form>
+
+    </div>
+</center>
+{%endblock%}

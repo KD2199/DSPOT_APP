@@ -1,0 +1,66 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}{{user.username}} Saved Item{%endblock%}
+
+
+{% block body%}
+<style>
+    .banner {
+      position: relative;
+      width: 300px;
+      /* height: 150px; */
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+  </style>
+
+<section class="text-gray-700 body-font"  style="padding-top: 5rem;">
+    <div class="container px-5 mx-auto">
+        <div class="flex flex-wrap -m-4">
+            {%for i in obj%}
+
+            <div class="p-4 md:w-1/3">
+                <div class="h-full border-2 border-gray-200 rounded-lg overflow-hidden">
+                    {%for j in obj1%}
+                    {% if j.Creater == i.Your_Name and j.id == i.Design_No%}
+                    <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{j.Upload_Pictures.url}}" alt="blog">
+                    {% endif %}
+                    {% endfor %}
+                    <div class="p-6">
+                        <form action="/home/detail/" method='post' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <center>
+                                <input type="hidden" name='FW' value="{{i.Creater}}">
+                                <button class="genric-btn info radius" style="width: 100%;margin-top: 10px;"><i
+                                        class="fa fa-user-circle"></i> About {{i.Creater}}</button>
+                            </center>
+                        </form>
+
+                        <form action="/home/delete/" method='post' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <center>
+                                <input type="hidden" name='FW' value="{{i.Design_No}}">
+                                <button class="genric-btn danger radius" style="width: 100%;margin-top: 10px;"><i
+                                        class="fa fa-trash"></i> Remove From Saved</button>
+                            </center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="flex flex-col text-center w-full mb-20 mt-20">
+                <img src="/static/save.svg" class="banner"><br>
+                <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900" style="color:red">You Have No
+                     Saved Item</h1>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+{%endblock%}

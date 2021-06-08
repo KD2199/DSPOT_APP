@@ -1,0 +1,57 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}CheckOut Now!{%endblock%}
+
+
+{% block body%}
+
+<section class="text-gray-700 body-font mb-10"  style="padding-top: 5rem;">
+    <div class="container">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">CheckOut Now! & Get Exclusive
+                Offers!</h1>
+        </div>
+
+        <div class="flex flex-wrap -m-4" style="justify-content: center;">
+            {%for i in obj%}
+            <div>
+                <div class="h-full border-2 border-gray-200 rounded-lg overflow-hidden">
+                    {%for j in img%}
+                    {% if j.Your_Name == i.Creater and j.id == i.Design_No%}
+                    <img class="rounded-lg h-64 overflow-hidden" src="{{j.Upload_Pictures.url}}" alt="blog">
+                    {% endif %}
+                    {% endfor %}
+
+                    <form action="/home/detail/" method='post' enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <center>
+                            <input type="hidden" name='FW' value="{{i.Creater}}">
+                            <button class="genric-btn info radius mt-2  w-full" style="width: 100%;margin-top: 10px;"><i
+                                    class="fa fa-user-circle"></i> About {{i.Creater}}</button>
+                        </center>
+                    </form>
+                    <center>
+                        <button class="genric-btn danger radius mt-2  w-full" style="width: 100%;margin-top: 10px;"><i
+                                class="fa fa-money-bill-alt"></i> Final Price :{{Price}} Rs.</button>
+                        <form action="{% url 'pay' Did=i.Design_No %}" method='post' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name='Pm' value="{{i.Design_No}}">
+                            <button class="genric-btn primary radius mt-2  w-full"style="width: 100%;margin-top: 10px;"><i
+                                    class="fa fa-handshake"></i> Make Payment</button>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900" style="color:red">Your Cart
+                Is Empty</h1>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+</section>
+
+{%endblock%}

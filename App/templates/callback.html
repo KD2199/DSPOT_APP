@@ -1,0 +1,45 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}Order History{%endblock%}
+
+{% block body%}
+
+<body>
+    <div class="flex flex-col text-center w-full mb-20"  style="padding-top: 5rem;">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Transaction STATUS: {{ STATUS }}
+        </h1>
+
+    </div>
+    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+        <table class="table-auto w-full text-left whitespace-no-wrap">
+            <tbody>
+                <tr>
+                    <td class="px-4 py-3"> ORDERID</td>
+                    <td class="px-4 py-3"> {{ ORDERID }} </td>
+
+                </tr>
+                <tr>
+                    <td class="px-4 py-3"> TXNID</td>
+                    <td class="px-4 py-3"> {{ TXNID }} </td>
+
+                </tr>
+                <tr>
+                    <td class="px-4 py-3"> BANKTXNID</td>
+                    <td class="px-4 py-3"> {{ BANKTXNID }} </td>
+
+                </tr>
+                <tr>
+                    <td class="px-4 py-3"> TXNAMOUNT</td>
+                    <td class="px-4 py-3"> {{ TXNAMOUNT }} </td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-3"> TXNDATE</td>
+                    <td class="px-4 py-3"> {{ TXNDATE }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <center><a href="/"><button class="genric-btn danger radius mt-2 w-1/2"> Go Back To Home</button></a></center>
+</body>
+
+{%endblock%}

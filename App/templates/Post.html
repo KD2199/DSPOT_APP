@@ -1,0 +1,81 @@
+{%extends 'basic.html'%}
+{% load static%}
+{% block title%}{{user.username}}'s Posts{%endblock%}
+
+
+{% block body%}
+<style>
+    .banner {
+      position: relative;
+      width: 300px;
+      /* height: 150px; */
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+  </style>
+
+<section class="text-gray-700 body-font" style="padding-top: 5rem;">
+    <div class="container px-5">
+        <div class="flex flex-wrap sm:-m-4 mx-4 mb-10 ">
+            {%for i in obj1%}
+            <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+                <div class="rounded-lg h-64 overflow-hidden">
+                    <img alt="content" class="object-cover object-center h-1/2 w-full" src="{{i.Upload_Pictures.url}}">
+                  </div>
+                {% if i.Make_Private is True %}
+                <center>
+                    <form method="post" action="/home/makepb/">
+                        {% csrf_token %}
+                        <input type="hidden" name="SS" value="{{i.id}}">
+                        <input type="submit" class="genric-btn info radius" value=" &#xf13e; Make Public"
+                            style="margin-top: 10px;width: 100%;font-family: FontAwesome;">
+                    </form>
+                </center>
+                {% else %}
+                <center>
+                    <form method="post" action="/home/makepv/">
+                        {% csrf_token %}
+                        <input type="hidden" name="SS" value="{{i.id}}">
+                        <input type="submit" class="genric-btn info radius" value=" &#xf023; Make Private"
+                            style="margin-top: 10px;width: 100%;font-family: FontAwesome;">
+                    </form>
+                </center>
+                {% endif %}
+                <center>
+                    <form method="post" action="/home/psdt/">
+                        {% csrf_token %}
+                        <input type="hidden" name="SS" value="{{i.id}}">
+                        <input type="submit" class="genric-btn danger radius" value=" &#xf1f8; Delete Post"
+                            style="margin-top: 10px;width: 100%;font-family: FontAwesome;">
+                    </form>
+                </center>
+                <!-- <h2 class="text-xl font-medium title-font text-gray-900 mt-3">Creater :
+                    {{i.Creater}}</h2> -->
+                <h4 class="text-xl font-medium title-font text-gray-900 mt-3">Category : {{i.Select_Region}}</h4>
+                <h4 class="text-xl font-medium title-font text-gray-900 mt-3">Description : {{i.About_Design}}</h4>
+                <h4 class="text-xl font-medium title-font text-gray-900 mt-3">Price : {{i.Price}}</h4>
+                <h4 class="text-xl font-medium title-font text-gray-900 mt-3">Likes : {{i.Likes}}</h4>
+                <div style="background-color: black;color: aliceblue;text-align: center;border-radius: 20px;">
+                    {%for j in obj%}
+                    {% if j.Design_No == i.id %}
+                    <p>{{j.UserName}} : {{j.Comment}}</p>
+                    {% endif %}
+                    {% empty %}
+                    <p>You Have No Any Comments</p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="flex flex-col text-center w-full mb-20 mt-12">
+                <img src="/static/POST.svg" class="banner"><br>
+                <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900" style="color:red">You Have No
+                    Any Published Designs</h1>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{%endblock%}
